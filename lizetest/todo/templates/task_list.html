@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Task List</h2>
+  <ul>
+    {% for task in tasks %}
+      <li>
+        {{ task.title }} - {{ task.description }} - {{ task.category }} 
+        <a href="{% url 'todo:task_edit' pk=task.pk %}">Editar</a>
+        <a href="{% url 'todo:task_delete' pk=task.pk %}">Remover</a>
+
+      </li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'todo:task_create' %}">Add Task</a>
+{% endblock %}
