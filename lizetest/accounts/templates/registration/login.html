@@ -1,6 +1,65 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+  body {
+    font-family: Arial, sans-serif; /* Fonte padrão mais legível */
+    background-color: #10141E; /* Cor de fundo mais suave */
+    display: flex; /* Usa flexbox para alinhamento */
+    align-items: center; /* Alinha verticalmente ao centro */
+    justify-content: center; /* Alinha horizontalmente ao centro */
+    min-height: 100vh; /* Altura mínima de 100% da altura da viewport */
+    margin: 0; /* Remove a margem padrão */
+  }
+  .login-container {
+    width: 100%; /* Largura completa para mobile */
+    max-width: 400px; /* Máximo de 400px para não ficar muito grande */
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+  form {
+    margin-top: 20px;
+  }
+  label {
+    color: #666;
+  }
+  input, button {
+    width: calc(100% - 22px); /* Tamanho total menos padding */
+    padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  button {
+    background-color: #5c67f2;
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #5058e5;
+  }
+  a {
+    text-decoration: none;
+    color: #5c67f2;
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<div class="login-container">
   <h2>Login</h2>
   <form method="post">
     {% csrf_token %}
@@ -8,4 +67,5 @@
     <button type="submit">Login</button>
   </form>
   <a href="{% url 'accounts:signup' %}">Don't have an account? Sign up here.</a>
+</div>
 {% endblock %}
