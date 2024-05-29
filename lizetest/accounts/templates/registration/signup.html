@@ -69,8 +69,19 @@
   <form method="post" id="signupForm">
     {% csrf_token %}
     {{ form.as_p }}
+    {% if form.errors %}
+      <div class="error">
+        <p>There were errors in your form:</p>
+        <ul>
+          {% for field in form %}
+            {% for error in field.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
     <div class="password-mismatch" id="passwordMismatch">Passwords do not match.</div>
-    <div class="password-match" id="passwordMatch">Passwords match!!</div>
     <button type="submit">Sign Up</button>
   </form>
   <a href="{% url 'accounts:login' %}">Already have an account? Log in here.</a>
@@ -81,15 +92,12 @@ document.getElementById('signupForm').addEventListener('input', function() {
   var password = document.querySelector('input[name="password1"]');
   var confirmPassword = document.querySelector('input[name="password2"]');
   var mismatchMessage = document.getElementById('passwordMismatch');
-  // var matchMessage = document.getElementById('passwordMatch');
   
   if (password.value === confirmPassword.value) {
     mismatchMessage.style.display = 'none';
-    // matchMessage.style.display = 'block'
   } else {
     mismatchMessage.style.display = 'block';
   }
-
 });
 </script>
 
