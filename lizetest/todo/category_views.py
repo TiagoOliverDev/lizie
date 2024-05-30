@@ -7,14 +7,23 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Category
 from .forms import CategoryForm
+from .category_filters import CategoryFilter
+from django_filters.views import FilterView
 
-class CategoryListView(LoginRequiredMixin, ListView):
+
+class CategoryListView(LoginRequiredMixin, FilterView):
     model = Category
+    filterset_class = CategoryFilter
     template_name = 'category_list.html'
     context_object_name = 'categories'
 
     def get_queryset(self):
         return Category.objects.filter(user=self.request.user)
+
+    def get_filterset_kwargs(self, filterset_class):
+        kwargs = super(CategoryListView, self).get_filterset_kwargs(filterset_class)
+        kwargs['user'] = self.request.user
+        return kwargs
 
 class CategoryCreateView(LoginRequiredMixin, CreateView):
     model = Category

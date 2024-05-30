@@ -40,7 +40,10 @@ INSTALLED_APPS = [
 
     'lizetest.todo',
     'lizetest.core',
-    'lizetest.accounts'
+    'lizetest.accounts',
+    'crispy_forms',
+    'crispy_bootstrap4',
+    'django_filters'
 ]
 
 MIDDLEWARE = [
@@ -147,3 +150,5 @@ LOGGING = {
         },
     },
 }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
