@@ -1,11 +1,11 @@
-
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-
-from .models import Task
-from .forms import TaskForm
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import get_object_or_404, redirect
+from .models import Task, Category, Comment
+from .forms import TaskForm, CategoryForm, CommentForm
 from .task_filters import TaskFilter
+from .category_filters import CategoryFilter
 from django_filters.views import FilterView
 
 class TaskListView(LoginRequiredMixin, FilterView):
@@ -37,6 +37,28 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super(TaskCreateView, self).form_valid(form)
 
+class TaskDetailView(LoginRequiredMixin, DetailView):
+    model = Task
+    template_name = 'task_details.html'
+    context_object_name = 'task'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comments'] = self.object.comments.all()
+        context['comment_form'] = CommentForm()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.task = self.object
+            comment.user = request.user
+            comment.save()
+            return redirect('todo:task_details', pk=self.object.pk)
+        return self.render_to_response(self.get_context_data(form=form))
+
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = Task
     form_class = TaskForm
@@ -48,21 +70,8 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
         kwargs['user'] = self.request.user
         return kwargs
 
-# class TaskCreateView(LoginRequiredMixin, CreateView):
-#     model = Task
-#     form_class = TaskForm
-#     template_name = 'task_form.html'
-#     success_url = reverse_lazy('todo:task_list')
-
-# class TaskUpdateView(LoginRequiredMixin, UpdateView):
-#     model = Task
-#     form_class = TaskForm
-#     template_name = 'task_form.html'
-#     success_url = reverse_lazy('todo:task_list')
-
 class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
     template_name = 'task_confirm_delete.html'
     success_url = reverse_lazy('todo:task_list')
-
 

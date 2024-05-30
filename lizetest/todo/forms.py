@@ -1,6 +1,5 @@
 from django import forms
-from .models import Task
-from .models import Category
+from .models import Task, Category, Comment
 
 class TaskForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -16,3 +15,8 @@ class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ['name']
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']

@@ -11,6 +11,7 @@
     {% for task in tasks %}
       <li>
         {{ task.title }} - {{ task.description }} - {{ task.category }} 
+        <a href="{% url 'todo:task_details' pk=task.pk %}">Detalhes</a> 
         <a href="{% url 'todo:task_edit' pk=task.pk %}">Editar</a>
         <a href="{% url 'todo:task_delete' pk=task.pk %}">Remover</a>
       </li>

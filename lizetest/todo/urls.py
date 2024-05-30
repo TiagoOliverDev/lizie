@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import (TaskListView, TaskCreateView, TaskUpdateView, TaskDeleteView)
+from .views import (TaskListView, TaskCreateView, TaskUpdateView, TaskDeleteView, TaskDetailView)
 from .category_views import(CategoryListView, CategoryCreateView, CategoryUpdateView, CategoryDeleteView)
+from .comment_views import (CommentUpdateView, CommentDeleteView)
 
 app_name = "todo"
 
@@ -9,6 +10,9 @@ urlpatterns = [
     path('task/create/', TaskCreateView.as_view(), name='task_create'),
     path('task/<int:pk>/edit/', TaskUpdateView.as_view(), name='task_edit'),
     path('task/<int:pk>/delete/', TaskDeleteView.as_view(), name='task_delete'),
+    path('task/<int:pk>/details/', TaskDetailView.as_view(), name='task_details'),
+    path('comment/<int:pk>/edit/', CommentUpdateView.as_view(), name='comment_edit'),
+    path('comment/<int:pk>/delete/', CommentDeleteView.as_view(), name='comment_delete'),
     path('category/', CategoryListView.as_view(), name='category_list'),
     path('category/create/', CategoryCreateView.as_view(), name='category_create'),
     path('category/<int:pk>/edit/', CategoryUpdateView.as_view(), name='category_edit'),

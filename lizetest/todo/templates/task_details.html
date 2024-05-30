@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <h2>{{ task.title }}</h2>
+  <p>{{ task.description }}</p>
+  <p>Category: {{ task.category }}</p>
+
+  <h3>Comments</h3>
+  <ul>
+    {% for comment in comments %}
+      <li>
+        <strong>{{ comment.user }}:</strong> {{ comment.content }}
+        <a href="{% url 'todo:comment_edit' pk=comment.pk %}" class="btn btn-primary btn-sm">Edit</a>
+        <a href="{% url 'todo:comment_delete' pk=comment.pk %}" class="btn btn-danger btn-sm">Delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h4>Add a Comment</h4>
+  <form method="post">
+    {% csrf_token %}
+    {{ comment_form|crispy }}
+    <button type="submit" class="btn btn-primary">Add Comment</button>
+  </form>
+
+  <!-- <a href="{% url 'todo:task_edit' pk=task.pk %}" class="btn btn-secondary">Edit Task</a>
+  <a href="{% url 'todo:task_delete' pk=task.pk %}" class="btn btn-danger">Delete Task</a> -->
+{% endblock %}
