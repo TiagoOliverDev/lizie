@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-  <h2>{% if request.resolver_match.url_name == 'task_create' %}Create{% else %}Edit{% endif %} Task</h2>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">{% if request.resolver_match.url_name == 'task_create' %}Create{% else %}Save Changes{% endif %}</button>
-  </form>
-  <a href="{% url 'todo:task_list' %}">Back to Task List</a>
+<div class="container mt-5">
+  <h2 class="mb-4 text-center text-white">{% if request.resolver_match.url_name == 'task_create' %}Create{% else %}Edit{% endif %} Task</h2>
+  <div class="card">
+    <div class="card-body">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary btn-block mt-3">{% if request.resolver_match.url_name == 'task_create' %}Create{% else %}Save Changes{% endif %}</button>
+      </form>
+      <a href="{% url 'todo:task_list' %}" class="btn btn-secondary btn-block mt-3">Back to Task List</a>
+    </div>
+  </div>
+</div>
 {% endblock %}

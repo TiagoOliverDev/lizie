@@ -2,23 +2,32 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-  <h2>{{ task.title }}</h2>
-  <p>{{ task.description }}</p>
-  <p>Category: {{ task.category }}</p>
+<div class="container mt-5">
+  <h2 class="mb-4 text-white p-3 text-center">{{ task.title }}</h2>
+  <div class="card">
+    <div class="card-body">
+      <p class="card-text">{{ task.description }}</p>
+      <p class="card-text"><small class="text-muted">Category: {{ task.category }}</small></p>
+    </div>
+  </div>
 
-  <h3>Comments</h3>
-  <ul>
+  <h3 class="mt-4 text-white">Comments</h3>
+  <ul class="list-group mb-4">
     {% for comment in comments %}
-      <li>
-        <strong>{{ comment.user }}:</strong> {{ comment.content }}
-        <a href="{% url 'todo:comment_edit' pk=comment.pk %}" class="btn btn-primary btn-sm">Edit</a>
-        <a href="{% url 'todo:comment_delete' pk=comment.pk %}" class="btn btn-danger btn-sm">Delete</a>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>{{ comment.user }}:</strong> {{ comment.content }}
+        </div>
+        <div>
+          <a href="{% url 'todo:comment_edit' pk=comment.pk %}" class="btn btn-primary btn-sm mr-2">Edit</a>
+          <a href="{% url 'todo:comment_delete' pk=comment.pk %}" class="btn btn-danger btn-sm">Delete</a>
+        </div>
       </li>
     {% endfor %}
   </ul>
 
-  <h4>Add a Comment</h4>
-  <form method="post">
+  <h4 class="mt-4 text-white">Add a Comment</h4>
+  <form method="post" class="mb-4 text-white">
     {% csrf_token %}
     {{ comment_form|crispy }}
     <button type="submit" class="btn btn-primary">Add Comment</button>
@@ -26,4 +35,5 @@
 
   <!-- <a href="{% url 'todo:task_edit' pk=task.pk %}" class="btn btn-secondary">Edit Task</a>
   <a href="{% url 'todo:task_delete' pk=task.pk %}" class="btn btn-danger">Delete Task</a> -->
+</div>
 {% endblock %}
