@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="container mt-5"> 
+<div class="container mt-5">
   <h2 class="mb-4 text-white p-3 text-center">Task List</h2>
   <form method="get" class="mb-4">
     <div class="row text-white">
@@ -14,31 +14,43 @@
       </div>
     </div>
   </form>
-  <ul class="list-group">
-    {% for task in tasks %}
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <div>
-          <h5>{{ task.title }}</h5>
-          <p class="mb-1">{{ task.description }}</p>
-          <small class="text-muted">Category: {{ task.category }}</small>
-        </div>
-        <div class="d-flex align-items-center">
-          <div class="form-check mr-2">
+  <table class="table table-dark table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Category</th>
+        <th scope="col">Completed</th>
+        <th scope="col">Actions</th>
+        <th scope="col" class="text-right"> 
+          <a href="{% url 'todo:task_create' %}" class="btn btn-outline-success">
+            <i class="fas fa-plus"></i> Add Task
+          </a>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in tasks %}
+      <tr>
+        <td>{{ task.title }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ task.category }}</td>
+        <td>
+          <div class="form-check">
             <input class="form-check-input" type="checkbox" id="task-{{ task.pk }}" {% if task.completed %}checked{% endif %} onclick="toggleTaskComplete({{ task.pk }})">
-            <label class="form-check-label" for="task-{{ task.pk }}">Completed</label>
+            <label class="form-check-label" for="task-{{ task.pk }}"></label>
           </div>
-          <div>
-            <a href="{% url 'todo:task_details' pk=task.pk %}" class="btn btn-info btn-sm mr-2">Details</a>
-            <a href="{% url 'todo:task_edit' pk=task.pk %}" class="btn btn-primary btn-sm mr-2">Update</a>
-            <a href="{% url 'todo:task_delete' pk=task.pk %}" class="btn btn-danger btn-sm">Delete</a>
-          </div>
-        </div>
-      </li>
-    {% endfor %}
-  </ul>
-  <div class="mt-4">
-    <a href="{% url 'todo:task_create' %}" class="btn btn-success">Add Task</a>
-  </div>
+        </td>
+        <td>
+          <a href="{% url 'todo:task_details' pk=task.pk %}" class="btn btn-outline-info btn-sm mr-2">Details</a>
+          <a href="{% url 'todo:task_edit' pk=task.pk %}" class="btn btn-outline-primary btn-sm mr-2">Update</a>
+          <a href="{% url 'todo:task_delete' pk=task.pk %}" class="btn btn-outline-danger btn-sm">Delete</a>
+        </td>
+        <td></td> <!-- Vazio para alinhar corretamente com o cabeçalho -->
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 {% endblock %}
 
