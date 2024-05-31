@@ -22,10 +22,16 @@
           <p class="mb-1">{{ task.description }}</p>
           <small class="text-muted">Category: {{ task.category }}</small>
         </div>
-        <div>
-          <a href="{% url 'todo:task_details' pk=task.pk %}" class="btn btn-info btn-sm mr-2">Details</a>
-          <a href="{% url 'todo:task_edit' pk=task.pk %}" class="btn btn-primary btn-sm mr-2">Update</a>
-          <a href="{% url 'todo:task_delete' pk=task.pk %}" class="btn btn-danger btn-sm">Delete</a>
+        <div class="d-flex align-items-center">
+          <div class="form-check mr-2">
+            <input class="form-check-input" type="checkbox" id="task-{{ task.pk }}" {% if task.completed %}checked{% endif %} onclick="toggleTaskComplete({{ task.pk }})">
+            <label class="form-check-label" for="task-{{ task.pk }}">Completed</label>
+          </div>
+          <div>
+            <a href="{% url 'todo:task_details' pk=task.pk %}" class="btn btn-info btn-sm mr-2">Details</a>
+            <a href="{% url 'todo:task_edit' pk=task.pk %}" class="btn btn-primary btn-sm mr-2">Update</a>
+            <a href="{% url 'todo:task_delete' pk=task.pk %}" class="btn btn-danger btn-sm">Delete</a>
+          </div>
         </div>
       </li>
     {% endfor %}
@@ -34,4 +40,48 @@
     <a href="{% url 'todo:task_create' %}" class="btn btn-success">Add Task</a>
   </div>
 </div>
+{% endblock %}
+
+
+{% block extra_head %}
+<script>
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  function toggleTaskComplete(taskId) {
+    const csrftoken = getCookie('csrftoken');
+
+    fetch(`/api/task/${taskId}/toggle_complete/`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrftoken
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Task updated:', data);
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
+  }
+</script>
 {% endblock %}

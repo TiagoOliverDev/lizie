@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'lizetest.accounts',
     'crispy_forms',
     'crispy_bootstrap4',
+    'rest_framework',
     'django_filters'
 ]
 
