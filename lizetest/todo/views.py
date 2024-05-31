@@ -9,11 +9,13 @@ from .category_filters import CategoryFilter
 from django_filters.views import FilterView
 from django.http import HttpResponseForbidden
 
+
 class TaskListView(LoginRequiredMixin, FilterView):
     model = Task
     filterset_class = TaskFilter
     template_name = 'task_list.html'
     context_object_name = 'tasks'
+    paginate_by = 5
 
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user)

@@ -22,7 +22,7 @@
         <th scope="col">Category</th>
         <th scope="col">Completed</th>
         <th scope="col">Actions</th>
-        <th scope="col" class="text-right"> 
+        <th scope="col" class="text-right">
           <a href="{% url 'todo:task_create' %}" class="btn btn-outline-success">
             <i class="fas fa-plus"></i> Add Task
           </a>
@@ -30,7 +30,7 @@
       </tr>
     </thead>
     <tbody>
-      {% for task in tasks %}
+      {% for task in page_obj %}
       <tr>
         <td>{{ task.title }}</td>
         <td>{{ task.description }}</td>
@@ -46,11 +46,25 @@
           <a href="{% url 'todo:task_edit' pk=task.pk %}" class="btn btn-outline-primary btn-sm mr-2">Update</a>
           <a href="{% url 'todo:task_delete' pk=task.pk %}" class="btn btn-outline-danger btn-sm">Delete</a>
         </td>
-        <td></td> <!-- Vazio para alinhar corretamente com o cabeçalho -->
       </tr>
       {% endfor %}
     </tbody>
   </table>
+  <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">&laquo; previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next &raquo;</a>
+        {% endif %}
+    </span>
+  </div>
 </div>
 {% endblock %}
 
