@@ -2,8 +2,8 @@ import django_filters
 from .models import Task, Category
 
 class TaskFilter(django_filters.FilterSet):
-    title = django_filters.CharFilter(lookup_expr='icontains')
-    category = django_filters.ModelChoiceFilter(queryset=Category.objects.none())
+    title = django_filters.CharFilter(lookup_expr='icontains', label='Search tasks by title')
+    category = django_filters.ModelChoiceFilter(queryset=Category.objects.none(), label='Filter by category')
 
     class Meta:
         model = Task
