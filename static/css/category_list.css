@@ -1,0 +1,51 @@
+.container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #2c3e50;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #fff;
+  }
+
+  .container h2 {
+    color: #76c7c0;
+  } 
+
+  .table {
+    background-color: #34495e;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .table th, .table td {
+    border: none;
+    color: #fff;
+  }
+
+  .table thead th {
+    background-color: #3c6e71; 
+  }
+
+  .form-control, .form-select {
+    border-radius: 4px;
+    background-color: #34495e;
+    color: #fff;
+    border: 1px solid #2c3e50;
+  }
+
+  .form-control:focus {
+    border-color: #95a5a6;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.5); 
+  }
+
+  .search-group {
+    display: flex;
+    align-items: center;
+  }
+
+  .table th:last-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
