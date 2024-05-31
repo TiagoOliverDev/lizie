@@ -5,13 +5,32 @@
   <h2 class="mb-4 text-center text-white">Confirm Deletion</h2>
   <div class="card">
     <div class="card-body">
+      {% if error %}
+        <div class="alert alert-danger" role="alert">
+          {{ error }}
+        </div>
+      {% endif %}
       <p>Are you sure you want to delete the task "<strong>{{ object.title }}</strong>"?</p>
-      <form method="post" class="d-inline">
+      <form method="post" onsubmit="return checkCompletionStatus();">
         {% csrf_token %}
+        <input type="hidden" id="is-completed" value="{{ is_completed|yesno:'true,false' }}">
         <button type="submit" class="btn btn-danger">Confirm</button>
       </form>
       <a href="{% url 'todo:task_list' %}" class="btn btn-secondary ml-2">Cancel</a>
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  function checkCompletionStatus() {
+    const isCompleted = document.getElementById('is-completed').value === 'true';
+    if (isCompleted) {
+      alert("Cannot delete a completed task.");
+      return false; 
+    }
+    return true; 
+  }
+</script>
 {% endblock %}
