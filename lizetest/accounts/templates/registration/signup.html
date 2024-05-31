@@ -1,68 +1,8 @@
 {% extends 'base.html' %}
+{% load static %}  
 
 {% block content %}
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #10141E;
-  }
-  .signup-container {
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-  }
-  h2 {
-    text-align: center;
-    color: #333;
-  }
-  form {
-    margin-top: 20px;
-  }
-  label {
-    color: #666;
-  }
-  input, button {
-    width: calc(100% - 22px);
-    padding: 10px;
-    margin-top: 8px;
-    margin-bottom: 16px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  button {
-    background-color: #5c67f2;
-    color: white;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-  }
-  button:hover {
-    background-color: #5058e5;
-  }
-  a {
-    text-decoration: none;
-    color: #5c67f2;
-    display: block;
-    text-align: center;
-    margin-top: 20px;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-  .password-mismatch {
-    color: #ff0000; 
-    font-size: 0.8em; 
-    display: none; 
-  }
-  .password-match {
-    color: blue; 
-    font-size: 0.8em;
-    display: none; 
-  }
-</style>
+<link href="{% static 'css/signup.css' %}" rel="stylesheet">
 
 <div class="signup-container">
   <h2>Sign Up</h2>
