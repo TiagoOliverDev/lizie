@@ -73,6 +73,7 @@ I used the following technologies:
 
  source meu_venv/bin/activate
 
+ ```
  pip install -r requirements.txt
   ```
 
