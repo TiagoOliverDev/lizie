@@ -29,14 +29,7 @@
 {% endblock %}
 
 {% block extra_js %}
-<script>
-  function checkCompletionStatus() {
-    const isCompleted = document.getElementById('is-completed').value === 'true';
-    if (isCompleted) {
-      alert("Cannot delete a completed task.");
-      return false; 
-    }
-    return true; 
-  }
-</script>
+
+<script src="{% static 'js/task_check_status.js' %}"></script>
+
 {% endblock %}

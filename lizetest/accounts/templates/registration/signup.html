@@ -27,18 +27,6 @@
   <a href="{% url 'accounts:login' %}">Already have an account? Log in here.</a>
 </div>
 
-<script>
-document.getElementById('signupForm').addEventListener('input', function() {
-  var password = document.querySelector('input[name="password1"]');
-  var confirmPassword = document.querySelector('input[name="password2"]');
-  var mismatchMessage = document.getElementById('passwordMismatch');
-  
-  if (password.value === confirmPassword.value) {
-    mismatchMessage.style.display = 'none';
-  } else {
-    mismatchMessage.style.display = 'block';
-  }
-});
-</script>
+<script src="{% static 'js/signup_validation_error.js' %}"></script>
 
 {% endblock %}

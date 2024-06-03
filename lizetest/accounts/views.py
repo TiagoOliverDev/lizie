@@ -1,13 +1,12 @@
-import logging
-from typing import Any, Dict
-
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.contrib.auth import login
 from django.views.generic.edit import FormView
 
 from .forms import CustomUserCreationForm
 from .models import User
+
+import logging
 
 logger = logging.getLogger(__name__)
 
