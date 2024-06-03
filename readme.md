@@ -48,10 +48,10 @@ I used the following technologies:
 
 - Choose a folder in your local machine where you want this repository to be copied
 
-- Clone this [repository](https://github.com/TiagoOliverDev/lizie.git) to your local machine 
+- Clone this [repository](git@github.com:TiagoOliverDev/lizie.git) to your local machine 
 
    ```
-  git clone https://github.com/TiagoOliverDev/lizie.git
+  git clone git@github.com:TiagoOliverDev/lizie.git
   ```
 
 - Navigate to `cd lizie`  directory.
