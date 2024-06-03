@@ -1,6 +1,5 @@
-<h1 align="center">Front end Logap teste</h1>
+<h1 align="center">Django project</h1>
 
-Front end 
 
 <hr/>
 
