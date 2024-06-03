@@ -4,13 +4,15 @@
 {% block content %}
 <link href="{% static 'css/login.css' %}" rel="stylesheet">
 
-<div class="login-container">
-  <h2>Login</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-  </form>
-  <a href="{% url 'accounts:signup' %}">Don't have an account? Sign up here.</a>
+<div class="centralizar">
+  <div class="login-container">
+    <h2>Login</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Login</button>
+    </form>
+    <a href="{% url 'accounts:signup' %}">Don't have an account? Sign up here.</a>
+  </div>
 </div>
 {% endblock %}

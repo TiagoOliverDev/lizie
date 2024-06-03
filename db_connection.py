@@ -1,4 +1,3 @@
-# test_db_connection.py
 import django
 from django.conf import settings
 from django.db import connections
