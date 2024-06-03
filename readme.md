@@ -73,9 +73,6 @@ I used the following technologies:
 
  source meu_venv/bin/activate
 
- ```
- pip install -r requirements.txt
-  ```
 
 ## Step 3: 
 
@@ -100,7 +97,7 @@ Open folder project and open a terminal and run the following command:
 
   ```
 
-## Step 5: Run the tests
+## Step 6: Run the tests
 
 - Go to settings.py and uncomment the code on line 95 (# DATABASES['default'] = DATABASES['test'])
 
