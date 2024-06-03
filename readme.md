@@ -64,9 +64,6 @@ I used the following technologies:
 
  nome_da_env/Scripts/activate
 
- pip install -r requirements.txt
-
-
 # # Linux
 
  python3 -m venv meu_venv
@@ -85,6 +82,10 @@ Open folder project and open a terminal and run the following command:
 
   ```
   python manage.py makemigrations
+
+    write ind cmd:
+      1
+      timezone.now
 
   python manage.py migrate
 
