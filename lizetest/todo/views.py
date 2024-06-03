@@ -6,6 +6,10 @@ from django.shortcuts import redirect
 from django.http import HttpResponse, HttpResponseForbidden
 from django_filters.views import FilterView
 from django.views.generic import ListView
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from reportlab.lib import colors
 
 from .models import Task
 from .forms import TaskForm, CommentForm
@@ -155,3 +159,39 @@ class CompletedTasksListView(LoginRequiredMixin, ListView):
         Return only the tasks that are marked as completed for the logged-in user.
         """
         return Task.objects.filter(user=self.request.user, completed=True)
+    
+
+def download_tasks_pdf(request):
+    # Configuração de resposta HTTP para enviar arquivo PDF
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="completed_tasks.pdf"'
+
+    # Cria um documento PDF e define seu título
+    doc = SimpleDocTemplate(response, pagesize=letter)
+    story = []
+
+    # Consulta as tarefas completadas
+    tasks = Task.objects.filter(user=request.user, completed=True).values('title', 'description', 'category__name')
+
+    # Prepara dados para a tabela
+    data = [['Title', 'Description', 'Category']]
+    data += [[task['title'], task['description'], task['category__name']] for task in tasks]
+
+    # Cria a tabela
+    t = Table(data, splitByRow=1, repeatRows=1)
+
+    # Adiciona estilos à tabela
+    t.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.gray),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+    ]))
+
+    # Adiciona a tabela ao story
+    story.append(t)
+
+    doc.build(story)
+    return response

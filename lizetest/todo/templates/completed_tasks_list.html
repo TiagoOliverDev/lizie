@@ -33,7 +33,8 @@
       </tr>
       {% endfor %}
     </tbody>
-  </table>
+</table>
+<a href="{% url 'todo:download_tasks_pdf' %}" class="btn btn-outline-primary">Download report</a>
   
   {% if completed_tasks.has_other_pages %}
   <div class="pagination">
