@@ -1,63 +1,137 @@
-Bem-vindo ao nosso desafio para a vaga de Desenvolvedor Python/Django FullStack! Este é um teste projetado para avaliar suas habilidades e conhecimentos técnicos. Antes de começar, certifique-se de configurar o ambiente de desenvolvimento conforme as instruções abaixo.
+<h1 align="center">Front end Logap teste</h1>
 
-# Configuração do Ambiente
+Front end 
 
-1. Crie um virtualenv
-2. Instale as dependências do projeto
-3. Migre o banco de dados
-4. Rode o projeto
+<hr/>
 
-# Desafios
- 
-Desafio 1 - Verificação de Senha no Frontend  #### OK ####
-Na tela de cadastro de usuário (/accounts/singup/), adicione uma verificação via JavaScript no frontend para fornecer feedback em tempo real ao usuário, indicando se as senhas coincidem. 
+Login
+![background](https://github.com/TiagoOliverDev/lizie/blob/main/static/images/login.png)
 
-Desafio 2 - Redirecionamento para a Tela de Login #### OK ####
-Ao acessar as telas de listagem, cadastro e edição de uma task (/, task/create/, task/int:pk/delete/), redirecione  para a tela de login caso o usuário não esteja autenticado.
+Task List
+![background](https://github.com/TiagoOliverDev/lizie/blob/main/static/images/home.png)
 
-Desafio 3 - Redirecionamento após login #### OK ####
-Após a autenticação do usuário (/accounts/login/), o sistema deverá redirecionar para a listagem de tasks.
+Category List
+![background](https://github.com/TiagoOliverDev/lizie/blob/main/static/images/categoryList.png)
 
-Desafio 4 - Ajuste no modelo #### OK ####
-Herde as características do modelo BaseModel no app "core" no modelo Category no app "todo"
+Reports
+![background](https://github.com/TiagoOliverDev/lizie/blob/main/static/images/reports.png)
 
-Desafio 5 - CRUD do Modelo "Category"  #### OK ####
-No app "todo", implemente as operações CRUD (listagem, cadastro, edição e exclusão) para o modelo "Category". Adicione o campo "category" no formulário de cadastro da Task (task/create/). Os usuário só poderam ver, editar e excluir as categorias criadas por si mesmo. Ao cadastrar uma task, no campo de categoria devem aparecer apenas as categorias criadas por ele.
 
-Desafio 6 - Filtro de Tasks por Usuário Autenticado #### OK ####
-Na listagem de Tasks, mostre apenas as tarefas criadas pelo usuário autenticado. Ou seja, um usuário X não deve visualizar as tarefas criadas pelo usuário Y. 
 
-Desafio 7 - Implemente um recurso de filtro nas listagem de TASK (por title, category) e CATEGORY(por nome) #### OK ####
 
-Desafio 8 - Implementação de Comentários nas Tasks #### OK ####
-Adicione uma funcionalidade para que os usuários possam adicionar comentários nas tasks. Crie um modelo de comentários associado ao modelo de tasks e adicione a interface necessária para exibir e adicionar comentários na página de detalhes da task.
+<hr/>
 
-Desafio 9 - Rota de API (use Django Rest Framework) para Marcar uma Task como "Completa"  #### OK ####
-Crie uma rota de API para marcar uma Task como "Completa". Na listagem de tasks, implemente um checkbox que, ao ser clicado, envia uma requisição ao backend marcando a task como completada. Se desmarcar, a mesma rota deve ser chamada para desfazer a marcação.
+# Features 
 
-Desafio 10 - Bloqueio para Remover Task Completada #### OK ####
-Impedir a remoção de uma task marcada como completada a nível de backend, não apenas no frontend.
+- Auth and register account
+- Home page task list
+- Category list
+- Reports
 
-Desafio 11 - Redesign das Telas #### OK ####
-Aplique um redesign nas telas do sistema utilizando o template Bootstrap disponível em https://adminlte.io/. Baixe os HTMLs do template e integre-os ao projeto, utilizando conceitos como templates, blocks e includes. Crie um sidebar com duas opções: categorias e tasks.
+<hr/>
 
-Desafio 12 - Adição de Testes Unitários #### OK ####
-Implemente testes unitários para funcionalidades a sua escolha no projeto. Pelo menos 4 testes.
+# Technology
 
-Desafio 13 - Crie um novo recurso 
-Use sua criatividade e adicione um novo recurso ao sistema, que ainda não existe. Crie pelo menos um novo modelo para esse novo recurso.
+I used the following technologies:
 
-Desafio 14 - Paginação na Listagem de Tasks #### OK ####
-Implemente a paginação na listagem de tasks para garantir uma melhor experiência do usuário, especialmente quando há um grande número de tarefas.
+- Python
+- Django
+- Django Rest Framework
+- Unitest
 
-Desafio 15 - Containerização do Projeto com Docker #### OK ####
-Containerize o seu projeto utilizando o Docker. Crie um Dockerfile que inclua todas as dependências necessárias para o seu projeto, configure a aplicação para rodar em um container. Considere também o uso do Docker Compose.
 
-# Entrega do Projeto
+<hr/>
 
-1. Crie um repositório privado em seu GitHub.
-2. Envie suas modificações para o projeto no GitHub.
-3. Adicione o usuário franklindias como colaborador do projeto.
-4. Marque a data desejada para a apresentação do projeto em https://calendar.app.google/moy5AsStjGd8vJTB6
 
-Sinta-se à vontade para adicionar ou aprimorar funcionalidades, bem como melhorar as implementações existentes conforme julgar apropriado. Boa sorte!
+# Steps for run project
+
+## Step 1: Clone the repository
+
+- Choose a folder in your local machine where you want this repository to be copied
+
+- Clone this [repository](https://github.com/TiagoOliverDev/lizie.git) to your local machine 
+
+   ```
+  git clone https://github.com/TiagoOliverDev/lizie.git
+  ```
+
+- Navigate to `cd lizie`  directory.
+
+## Step 2: Create env
+
+# # windows
+
+ python -m venv nome_da_env
+
+ nome_da_env/Scripts/activate
+
+ pip install -r requirements.txt
+
+
+# # Linux
+
+ python3 -m venv meu_venv
+
+ source meu_venv/bin/activate
+
+ pip install -r requirements.txt
+  ```
+
+## Step 3: 
+
+Open folder project and open a terminal and run the following command:
+
+  ```
+  pip install -r requirements.txt
+  ```
+## Step 4: generate migrations
+
+  ```
+  python manage.py makemigrations
+
+  python manage.py migrate
+
+  ```
+
+## Step 5: Run the project
+
+  ```
+  python manage.py runserver
+
+  ```
+
+## Step 5: Run the tests
+
+- Go to settings.py and uncomment the code on line 95 (# DATABASES['default'] = DATABASES['test'])
+
+- generate migrations for tests 
+
+  ```  
+  python manage.py migrate --database=test
+
+  ```
+
+- Run basics tests from "lizetest\accounts\tests.py"
+
+  ```  
+  python manage.py test
+
+  ```
+
+
+<hr/>
+
+
+## Author
+
+:man: **Tiago Oliveira**
+
+- [GitHub](https://github.com/TiagoOliverDev/)
+- [LinkedIn](https://www.linkedin.com/in/tiago-oliveira-49a2a6205/)
+
+## 🤝 Contributing
+- Contributions, issues, and feature requests are welcome!
+- Feel free to check the [issues page](https://github.com/TiagoOliverDev/lizie/issues).
+
+# Show your support
+Give a ⭐ if you like this project!
