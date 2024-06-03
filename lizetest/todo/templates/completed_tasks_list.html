@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %} 
+
+{% block content %}
+<link href="{% static 'css/task_list.css' %}" rel="stylesheet">
+
+<div class="container mt-5">
+  <h2 class="mb-4 p-3"><i class="fas fa-check-circle"></i> Completed Tasks</h2>
+
+  <table class="table table-dark table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Category</th>
+        <th scope="col" class="text-right">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in completed_tasks %}
+      <tr>
+        <td>{{ task.title }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ task.category }}</td>
+        <td class="text-right">
+          <a href="{% url 'todo:task_details' pk=task.pk %}" class="btn btn-outline-info btn-sm mr-2">Details</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4" class="text-center">No completed tasks found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+  {% if completed_tasks.has_other_pages %}
+  <div class="pagination">
+    <span class="step-links">
+      {% if completed_tasks.has_previous %}
+        <a href="?page={{ completed_tasks.previous_page_number }}">&laquo; previous</a>
+      {% endif %}
+
+      <span class="current">
+        Page {{ completed_tasks.number }} of {{ completed_tasks.paginator.num_pages }}.
+      </span>
+
+      {% if completed_tasks.has_next %}
+        <a href="?page={{ completed_tasks.next_page_number }}">next &raquo;</a>
+      {% endif %}
+    </span>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
