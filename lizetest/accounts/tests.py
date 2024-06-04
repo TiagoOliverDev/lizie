@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 class SignUpViewTests(TestCase):
     def setUp(self):
         self.url = reverse('accounts:signup')
-        self.login_url = reverse('accounts:login')  
+        self.login_url = reverse('todo:task_list')  
         self.user_model = get_user_model()
 
     def test_form_valid(self):
